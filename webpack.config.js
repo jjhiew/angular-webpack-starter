@@ -21,7 +21,7 @@ var config = {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'ng-annotate!babel',
         exclude: [/node_modules/]
       },
       {test: /\.html$/, loader: 'html', exclude: [/node_modules/]},
@@ -33,6 +33,7 @@ var config = {
 
 if (process.env.NODE_ENV === 'production') {
   config.output.path = path.join(__dirname, '/dist');
+  config.plugins.push(new webpack.optimize.UglifyJsPlugin());
 }
 
 module.exports = config;

@@ -3,7 +3,7 @@ module.exports = function(ngModule) {
     require('./jj-hello.test')(ngModule);
   }
 
-  ngModule.directive('jjHello', function() {
+  ngModule.directive('jjHello', ['$log', function($log) {
     require('./jj-hello.scss');
     return {
       restrict: 'E',
@@ -13,7 +13,8 @@ module.exports = function(ngModule) {
       controller: function ctrl() {
         var ctrl = this;
         ctrl.greeting = 'Hello';
+        $log.info('Hello');
       }
     };
-  });
+  }]);
 };
