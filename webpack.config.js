@@ -34,6 +34,7 @@ var config = {
 if (process.env.NODE_ENV === 'production') {
   config.output.path = path.join(__dirname, '/dist');
   config.plugins.push(new webpack.optimize.UglifyJsPlugin());
+  config.devtool = 'source-map';
 }
 
 module.exports = config;
