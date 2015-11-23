@@ -1,11 +1,14 @@
 var webpack = require('webpack');
+var path = require('path');
 
-module.exports = {
-  context: __dirname + '/app',
+var APP_PATH = path.join(__dirname, '/app');
+
+var config = {
+  context: APP_PATH,
   entry: './index.js',
   output: {
-    path: __dirname + '/app',
-    filename: 'bundle.js',
+    path: APP_PATH,
+    filename: 'bundle.js'
   },
 
   plugins: [
@@ -16,13 +19,20 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /\.js$/,
+      {
+        test: /\.js$/,
         loader: 'babel',
         exclude: [/node_modules/]
       },
-      { test: /\.html$/, loader: 'html', exclude: [/node_modules/] },
-      { test: /\.css$/, loader: 'style!css', exclude: [/node_modules/] },
-      { test: /\.scss$/, loader: 'style!css!sass', exclude: [/node_modules/] },
-    ],
-  },
+      {test: /\.html$/, loader: 'html', exclude: [/node_modules/]},
+      {test: /\.css$/, loader: 'style!css', exclude: [/node_modules/]},
+      {test: /\.scss$/, loader: 'style!css!sass', exclude: [/node_modules/]}
+    ]
+  }
 };
+
+if (process.env.NODE_ENV === 'production') {
+  config.output.path = path.join(__dirname, '/dist');
+}
+
+module.exports = config;
